@@ -1,0 +1,299 @@
+Script started on Thu Dec  8 06:31:11 2016
+]0;~/Things/Projects/sololearn-sql/src[?1034h[35;1m[src (master)]$[0m brew services start mysql
+[34m==>[0m [1mSuccessfully started `mysql` (label: homebrew.mxcl.mysql)[0m
+]0;~/Things/Projects/sololearn-sql/src[35;1m[src (master)]$[0m brew services list
+[0;1mName           Status  User    Plist[0m
+docker-machine stopped         
+emacs-plus     stopped         
+mongodb        stopped         
+mysql          [32mstarted[0m enogrob /Users/enogrob/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+neo4j          stopped         
+postgresql     stopped         
+redis          stopped         
+]0;~/Things/Projects/sololearn-sql/src[35;1m[src (master)]$[0m ls -la
+total 40
+drwxr-xr-x  5 enogrob  staff   170 Dec  8 06:31 [36m.[39;49m[0m
+drwxr-xr-x@ 8 enogrob  staff   272 Dec  7 21:35 [36m..[39;49m[0m
+-rw-r--r--@ 1 enogrob  staff  6148 Dec  1 08:04 .DS_Store
+-rw-r--r--  1 enogrob  staff  7369 Dec  7 21:34 20161207_2129-typescript.log
+-rw-r--r--  1 enogrob  staff   728 Dec  8 06:31 20161208_0631-typescript.log
+]0;~/Things/Projects/sololearn-sql/src[35;1m[src (master)]$[0m mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.16 Homebrew
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| menagerie          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.03 sec)
+
+mysql> use menagerie;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_menagerie |
++---------------------+
+| event               |
+| pet                 |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from pet where io = [K[Kd = 7;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+mysql> show columns pet;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'pet' at line 1
+mysql> show columns pet;[K[K[K[Kfrom pet;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(20) | YES  |     | NULL    |       |
+| owner   | varchar(20) | YES  |     | NULL    |       |
+| species | varchar(20) | YES  |     | NULL    |       |
+| sex     | char(1)     | YES  |     | NULL    |       |
+| birth   | date        | YES  |     | NULL    |       |
+| death   | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select * from pet where [K[K[K[K[K;
++----------+--------+---------+------+------------+------------+
+| name     | owner  | species | sex  | birth      | death      |
++----------+--------+---------+------+------------+------------+
+| Fluffy   | Harold | cat     | f    | 1993-02-04 | NULL       |
+| Claws    | Gwen   | cat     | m    | 1994-03-17 | NULL       |
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang     | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser   | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL       |
+| Whistler | Gwen   | bird    | NULL | 1997-12-09 | NULL       |
+| Slim     | Benny  | snake   | m    | 1996-04-29 | NULL       |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL       |
++----------+--------+---------+------+------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> sel[Klect * from pet where species = :[K"cat";
++--------+--------+---------+------+------------+-------+
+| name   | owner  | species | sex  | birth      | death |
++--------+--------+---------+------+------------+-------+
+| Fluffy | Harold | cat     | f    | 1993-02-04 | NULL  |
+| Claws  | Gwen   | cat     | m    | 1994-03-17 | NULL  |
++--------+--------+---------+------+------------+-------+
+2 rows in set (0.01 sec)
+
+mysql> select * from pet where species = "cat";[1@!=
++----------+--------+---------+------+------------+------------+
+| name     | owner  | species | sex  | birth      | death      |
++----------+--------+---------+------+------------+------------+
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang     | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser   | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL       |
+| Whistler | Gwen   | bird    | NULL | 1997-12-09 | NULL       |
+| Slim     | Benny  | snake   | m    | 1996-04-29 | NULL       |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL       |
++----------+--------+---------+------+------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from pet where species != "cat";[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kbirth between "1989-01-01" and "1990-12-30";
++-------+--------+---------+------+------------+-------+
+| name  | owner  | species | sex  | birth      | death |
++-------+--------+---------+------+------------+-------+
+| Buffy | Harold | dog     | f    | 1989-05-13 | NULL  |
+| Fang  | Benny  | dog     | m    | 1990-08-27 | NULL  |
++-------+--------+---------+------+------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from pet where birth between "1989-01-01" and "1990-12-30";-30";[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[K;[Ks;e;x; ;=; ;';f;';;;
++----------+--------+---------+------+------------+-------+
+| name     | owner  | species | sex  | birth      | death |
++----------+--------+---------+------+------------+-------+
+| Fluffy   | Harold | cat     | f    | 1993-02-04 | NULL  |
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL  |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL  |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL  |
++----------+--------+---------+------+------------+-------+
+4 rows in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> select * from pet hw[K[Kwhere species = 'dog' and sex = 'f';
++-------+--------+---------+------+------------+-------+
+| name  | owner  | species | sex  | birth      | death |
++-------+--------+---------+------+------------+-------+
+| Buffy | Harold | dog     | f    | 1989-05-13 | NULL  |
++-------+--------+---------+------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from pet where species = 'dog' and sex = 'f';[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kin ('dog','cat');
++--------+--------+---------+------+------------+------------+
+| name   | owner  | species | sex  | birth      | death      |
++--------+--------+---------+------+------------+------------+
+| Fluffy | Harold | cat     | f    | 1993-02-04 | NULL       |
+| Claws  | Gwen   | cat     | m    | 1994-03-17 | NULL       |
+| Buffy  | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang   | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
++--------+--------+---------+------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from pet where species in ('dog','cat');[1@ni[1@oi[1@ti[1@ iin ('dog',[P'[Pc[P'[P'[P'[Pc
++----------+--------+---------+------+------------+------------+
+| name     | owner  | species | sex  | birth      | death      |
++----------+--------+---------+------+------------+------------+
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang     | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser   | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL       |
+| Whistler | Gwen   | bird    | NULL | 1997-12-09 | NULL       |
+| Slim     | Benny  | snake   | m    | 1996-04-29 | NULL       |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL       |
++----------+--------+---------+------+------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select concat name,',',owner from pet;
+ERROR 1054 (42S22): Unknown column 'concat' in 'field list'
+mysql> select concat name,',',owner from pet;[1@(  [Pnname,',',owner[1@) 
++------------------------+
+| concat(name,',',owner) |
++------------------------+
+| Fluffy,Harold          |
+| Claws,Gwen             |
+| Buffy,Harold           |
+| Fang,Benny             |
+| Bowser,Diane           |
+| Chirpy,Gwen            |
+| Whistler,Gwen          |
+| Slim,Benny             |
+| Puffball,Diane         |
++------------------------+
+9 rows in set (0.00 sec)
+
+mysql> select concat(name,',',owner) from pet;[1@af[1@sf[1@ f[1@nf[1@ef[1@wf[1@_f[1@cf[1@of[1@lf[1@uf[1@mf[1@nf[1@ f
++----------------+
+| new_column     |
++----------------+
+| Fluffy,Harold  |
+| Claws,Gwen     |
+| Buffy,Harold   |
+| Fang,Benny     |
+| Bowser,Diane   |
+| Chirpy,Gwen    |
+| Whistler,Gwen  |
+| Slim,Benny     |
+| Puffball,Diane |
++----------------+
+9 rows in set (0.00 sec)
+
+mysql> select concat(name,',',owner) as new_column from pet;[P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [P [1@n [1@a [P [P [1@*  as new_column[P [P [P [P [P [P [P [P [P [P [Pf[P [P [Pf [1@ f
++----------+--------+---------+------+------------+------------+
+| name     | owner  | species | sex  | birth      | death      |
++----------+--------+---------+------+------------+------------+
+| Fluffy   | Harold | cat     | f    | 1993-02-04 | NULL       |
+| Claws    | Gwen   | cat     | m    | 1994-03-17 | NULL       |
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang     | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser   | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL       |
+| Whistler | Gwen   | bird    | NULL | 1997-12-09 | NULL       |
+| Slim     | Benny  | snake   | m    | 1996-04-29 | NULL       |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL       |
++----------+--------+---------+------+------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_menagerie |
++---------------------+
+| event               |
+| pet                 |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select columns from event;
+ERROR 1054 (42S22): Unknown column 'columns' in 'field list'
+mysql> select columns from event;[P [P [P [P [P [1@h [1@o [1@w 
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| name   | varchar(20)  | YES  |     | NULL    |       |
+| date   | date         | YES  |     | NULL    |       |
+| type   | varchar(15)  | YES  |     | NULL    |       |
+| remark | varchar(255) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| menagerie          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from pet;
++----------+--------+---------+------+------------+------------+
+| name     | owner  | species | sex  | birth      | death      |
++----------+--------+---------+------+------------+------------+
+| Fluffy   | Harold | cat     | f    | 1993-02-04 | NULL       |
+| Claws    | Gwen   | cat     | m    | 1994-03-17 | NULL       |
+| Buffy    | Harold | dog     | f    | 1989-05-13 | NULL       |
+| Fang     | Benny  | dog     | m    | 1990-08-27 | NULL       |
+| Bowser   | Diane  | dog     | m    | 1979-08-31 | 1995-07-29 |
+| Chirpy   | Gwen   | bird    | f    | 1998-09-11 | NULL       |
+| Whistler | Gwen   | bird    | NULL | 1997-12-09 | NULL       |
+| Slim     | Benny  | snake   | m    | 1996-04-29 | NULL       |
+| Puffball | Diane  | hamster | f    | 1999-03-30 | NULL       |
++----------+--------+---------+------+------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> select * from pet;[K from pet where owner like 'Gw';
+Empty set (0.00 sec)
+
+mysql> select * from pet where owner like 'Gw';e';n';
++----------+-------+---------+------+------------+-------+
+| name     | owner | species | sex  | birth      | death |
++----------+-------+---------+------+------------+-------+
+| Claws    | Gwen  | cat     | m    | 1994-03-17 | NULL  |
+| Chirpy   | Gwen  | bird    | f    | 1998-09-11 | NULL  |
+| Whistler | Gwen  | bird    | NULL | 1997-12-09 | NULL  |
++----------+-------+---------+------+------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from pet where owner like 'Gwen';n';[K';[K%';';
++----------+-------+---------+------+------------+-------+
+| name     | owner | species | sex  | birth      | death |
++----------+-------+---------+------+------------+-------+
+| Claws    | Gwen  | cat     | m    | 1994-03-17 | NULL  |
+| Chirpy   | Gwen  | bird    | f    | 1998-09-11 | NULL  |
+| Whistler | Gwen  | bird    | NULL | 1997-12-09 | NULL  |
++----------+-------+---------+------+------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+]0;~/Things/Projects/sololearn-sql/src[35;1m[src (master)]$[0m exit
+
+Script done on Thu Dec  8 07:05:04 2016
