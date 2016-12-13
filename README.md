@@ -17,7 +17,7 @@ Learn everything you need to about the subject of this `Sololearn` project.
 ```
 [x] Basic Concepts
 [x] Filtering, Functions, Subqueries
-[ ] Join, Table Operations
-[ ] Challenges
-[ ] Certificate
+[x] Join, Table Operations
+[x] Challenges
+[x] Certificate
 ```
