@@ -18,6 +18,6 @@ Learn everything you need to about the subject of this `Sololearn` project.
 [x] Basic Concepts
 [x] Filtering, Functions, Subqueries
 [x] Join, Table Operations
-[ ] Challenges
-[ ] Certificate
+[x] Challenges
+[x] Certificate
 ```
